@@ -1,4 +1,4 @@
-# Homepage
+# [Homepage](https://kylebuii.github.io/Homepage/)
 
 Page featuring me!
 

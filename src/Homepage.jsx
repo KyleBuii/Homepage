@@ -62,7 +62,7 @@ function Homepage() {
                         let projectNameFormatted = project.replace(/[A-Z]/g, (char) => char.toLowerCase()).replace(/\s/g, '_');
                         return <div className='project'>
                             <div className='image-wrapper'>
-                                <img src={`/assets/${projectNameFormatted}.webp`}
+                                <img src={`./assets/${projectNameFormatted}.webp`}
                                     alt={project}/>
                             </div>
                             <div>
@@ -104,7 +104,7 @@ function Homepage() {
                         </a>
                     </div>
                 </div>
-                <img src='/assets/picture_2.webp'
+                <img src='./assets/picture_2.webp'
                     alt='Contact Me'/>
             </section>
         </div>
