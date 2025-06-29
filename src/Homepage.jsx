@@ -31,6 +31,16 @@ function Homepage() {
                 website: 'https://kylebuii.github.io/Library-of-Myralith/',
                 description: 'Simple library web application concept made with HTML/JS.',
             },
+            'CV Builder': {
+                github: 'https://github.com/KyleBuii/CV-Builder',
+                website: 'https://cv-builder-alpha-jet.vercel.app/',
+                description: 'A simple tool to build your resume fast with one clean style. Just fill in your info and download your CV hassle-free!',
+            },
+            'Moe Memory': {
+                github: 'https://github.com/KyleBuii/Moe-Memory',
+                website: 'https://kylebuii.github.io/Moe-Memory/',
+                description: 'Moe Memory is a fun and addictive anime-themed memory card game where you click unique waifu cards. Each successful guess increases your score — but beware, clicking the same card twice ends the game! Challenge your memory, enjoy charming anime art, and see how far you can go!',
+            },
         });
     }, []);
 
