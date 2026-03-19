@@ -1,9 +1,10 @@
-import { memo, useEffect, useMemo, useState } from 'react';
-import { FaGithub, FaLinkedin, FaPhoneAlt } from 'react-icons/fa';
-import { IoMdMail, IoMdOpen } from 'react-icons/io';
-import './Homepage.scss';
 import Particles, { initParticlesEngine } from '@tsparticles/react';
 import { loadSlim } from '@tsparticles/slim';
+import { memo, useEffect, useMemo, useRef, useState } from 'react';
+import { FaGithub, FaLinkedin, FaPhoneAlt } from 'react-icons/fa';
+import { IoMdMail, IoMdOpen } from 'react-icons/io';
+import Cursor from './cursor';
+import './homepage.scss';
 
 function Homepage() {
     const [init, setInit] = useState(false);
@@ -11,22 +12,26 @@ function Homepage() {
     const [linkGithub, setLinkGithub] = useState('');
     const [linkLinkedIn, setLinkLinkedIn] = useState('');
     const [projects, setProjects] = useState({});
+    const [bubbleCount, setBubbleCount] = useState(80);
+
+    const refContainer = useRef(null);
+
     const options = useMemo(
         () => ({
             fpsLimit: 60,
             particles: {
                 number: {
-                    value: 80,
+                    value: bubbleCount,
                     density: {
                         enable: true,
                         area: 800,
                     },
                 },
                 color: {
-                    value: "#ffffff",
+                    value: '#8cb4ff',
                 },
                 shape: {
-                    type: "circle",
+                    type: 'circle',
                 },
                 opacity: {
                     value: { min: 0.1, max: 0.5 },
@@ -48,10 +53,10 @@ function Homepage() {
                 },
                 move: {
                     enable: true,
-                    direction: "top",
+                    direction: 'top',
                     speed: { min: 1, max: 2 },
                     outModes: {
-                        default: "out",
+                        default: 'out',
                     },
                 },
             },
@@ -61,14 +66,14 @@ function Homepage() {
     );
 
     useEffect(() => {
-        setDescription("Hi, I'm Kyle Bui — a frontend developer with a strong focus on performance, accessibility, and interactive design. I enjoy building responsive web apps using modern frameworks like React and Vite, and I pay close attention to clean UI/UX and scalable architecture. I also work on games in Phaser.js and love solving creative technical challenges.");
+        setDescription('Hi, I\'m Kyle Bui — a frontend developer with a strong focus on performance, accessibility, and interactive design. I enjoy building responsive web apps using modern frameworks like React and Vite, and I pay close attention to clean UI/UX and scalable architecture. I also work on games in Phaser.js and love solving creative technical challenges.');
         setLinkGithub('https://github.com/KyleBuii/');
         setLinkLinkedIn('https://www.linkedin.com/in/kylebuii/');
         setProjects({
             'Widget Hell': {
                 github: 'https://github.com/KyleBuii/Widget-Hell',
                 website: 'https://widget-hell.vercel.app/',
-                description: 'Web application featuring a versatile array of draggable widgets! EX: Randomly generate quotes, translate or modify text, calculate computations, check the weather, play games, and more! You can display what widgets you want and move them however you will!',
+                description: 'Web application featuring a versatile array of draggable widgets. EX: Randomly generate quotes, translate or modify text, calculate computations, check the weather, play games, and more. You can display what widgets you want and move them however you will.',
             },
             'Gachapon': {
                 github: 'https://github.com/KyleBuii/Gachapon',
@@ -122,7 +127,7 @@ function Homepage() {
         });
     }, [projects]);
 
-    function applyBubbleAnimation(element, squiggle = null) {
+    const applyBubbleAnimation = (element, squiggle = null) => {
         const duration = (Math.random() * 6) + 3;
         const delay = Math.random() * 4;
         const directions = ['normal', 'reverse', 'alternate', 'alternate-reverse'];
@@ -134,7 +139,7 @@ function Homepage() {
         element.style.setProperty('--bubble-squiggle', bubbleSquiggle);
     };
 
-    function randomBubbleSquiggle() {
+    const randomBubbleSquiggle = () => {
         const variation = 10;
 
         const randomDeviation = () => {
@@ -168,8 +173,35 @@ function Homepage() {
         };
     };
 
+    const createRipple = (event) => {
+        const ripple = document.createElement('span');
+        ripple.classList.add('ripple');
+
+        const size = 20;
+        ripple.style.width = `${size}px`;
+        ripple.style.height = `${size}px`;
+
+        ripple.style.left = `${event.pageX - (size / 2)}px`;
+        ripple.style.top = `${event.pageY - (size / 2)}px`;
+
+        ripple.onanimationend = () => {
+            refContainer.current.removeChild(ripple);
+        };
+
+        refContainer.current.appendChild(ripple);
+
+        const dupeRipple = ripple.cloneNode();
+        setTimeout(() => {
+            refContainer.current.appendChild(dupeRipple);
+        }, 100);
+    };
+
     return (
-        <div className='flex-col'>
+        <div ref={refContainer}
+            className='flex-col'
+            style={{ position:'relative', overflow:'hidden' }}
+            onClick={(event) => createRipple(event)}>
+            <Cursor/>
             <section className='flex-row'>
                 <div className='picture bubble'></div>
                 <div className='about-me bubble flex-col'>
@@ -193,8 +225,9 @@ function Homepage() {
                 <div className='flex-row'>
                     {Object.keys(projects).map((project) => {
                         let projectInformation = projects[project];
-                        let projectNameFormatted = project.replace(/[A-Z]/g, (char) => char.toLowerCase()).replace(/\s/g, '_');
-                        return <div className='project bubble'
+                        let projectNameFormatted = project.replace(/[A-Z]/g, (char) => char.toLowerCase()).replace(/\s/g, '-');
+
+                        return <div className={`project bubble ${projectNameFormatted}`}
                             onClick={(event) => handleClickProject(event)}
                             style={{ backgroundImage: `url(./assets/${projectNameFormatted}.webp)` }}
                             key={project}>

@@ -45,6 +45,12 @@ a {
     }
 }
 
+#cursor-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
 #tsparticles {
     z-index: -1;
 }
@@ -61,7 +67,7 @@ a {
     border: 0;
 }
 
-/// Created by Pratham (https://codepen.io/prathkum/pen/gOmboMm)
+/// Created by Pratham [https://codepen.io/prathkum/pen/gOmboMm]
 /// Modified by me
 .bubble {
     display: flex;
@@ -84,29 +90,79 @@ a {
         width: 100%;
         border-radius: var(--bubble-squiggle);
         box-shadow:
-            inset -6px 6px 10px #1B6CFB,
+            inset -6px 6px 10px #337eff,
             inset 2px 6px 10px #1a74e5,
             inset 20px -20px 22px white,
             inset 40px -40px 44px #a8ceff;
     }
 
-    &::after {
-        content: '';
-        z-index: -1;
-        position: absolute;
-        top: 20%;
-        right: 20%;
-        height: 40px;
-        width: 40px;
-        background: #E6FDFB;
-        border-radius: 44% 56% 46% 54% / 36% 50% 50% 64%;
-        box-shadow: 16px 40px 0 -10px white;
-        opacity: 0.8;
-    }
-
     &:hover {
         animation-play-state: paused !important;
     }
+
+    /// Made by Simey [https://codepen.io/simeydotme/pen/PoyzbPM]
+    /// Modified by me
+    &.widget-hell {
+        &::after {
+            z-index: -1;
+            content: '';
+            position: absolute;
+            width: 95%;
+            height: 95%;
+            border-radius: var(--bubble-squiggle);
+            background-image: url(/assets/glitter.webp), url(/assets/glitter.webp),
+                linear-gradient(
+                    0deg,
+                    white 0px,
+                    #ff8951 5px,
+                    #dcbc169c 10%,
+                    transparent 50%
+                );
+            background-size: 350px 500px, 400px 650px, 100% 100%, 100% 100%;
+            background-blend-mode: hard-light, color-dodge, multiply;
+            mix-blend-mode: color-dodge;
+            filter: brightness(3.7) blur(7px) contrast(6);
+            animation: fire 1.75s linear infinite;
+        }
+    }
+
+    &.gachapon {
+        box-shadow: 0 0 50px #00e5ff;
+        text-shadow: 0 0 10px #fff700;
+        filter: brightness(110%);
+    }
+
+    &.library-of-myralith {
+        overflow: hidden;
+        
+        &::after {
+            z-index: -1;
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 200%;
+            background:
+                linear-gradient(
+                    120deg,
+                    transparent 0%,
+                    rgba(255, 255, 255, 0.1) 50%,
+                    transparent 100%
+                );
+            transform: rotate(25deg);
+            filter: blur(8px);
+            animation: shine 2s infinite;
+        }
+    }
+}
+
+.ripple {
+    z-index: -1;
+    pointer-events: none;
+    position: absolute;
+    border: 2px solid rgba(31, 132, 255, 0.2);
+    border-radius: 50%;
+    transform: scale(0);
+    animation: ripple-animation 20s linear;
 }
 
 .title {
@@ -136,6 +192,7 @@ a {
     max-width: 25rem;
     width: 100%;
     background-image: url(/assets/picture.webp);
+    background-position: top;
 }
 
 .about-me {
@@ -208,4 +265,21 @@ a {
     0%   { transform: translate(0, 0); }
     50%  { transform: translate(10px, -5px); }
     100% { transform: translate(0, 0); }
+}
+
+@keyframes fire {
+    0%   { background-position: center 0px, center 0px, 50% 100%, center center; }
+    100% { background-position: center -500px, center -650px, 50% 100%, center center; }
+}
+
+@keyframes ripple-animation {
+    to {
+        transform: scale(1000);
+        opacity: 0;
+    }
+}
+
+@keyframes shine {
+    0%   { left: -75%; }
+    100% { left: 150%; }
 }
