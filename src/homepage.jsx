@@ -5,6 +5,7 @@ import { FaGithub, FaLinkedin, FaPhoneAlt } from 'react-icons/fa';
 import { IoMdMail, IoMdOpen } from 'react-icons/io';
 import Cursor from './cursor';
 import './homepage.scss';
+import MatterScene from './matterScene';
 
 function Homepage() {
     const [init, setInit] = useState(false);
@@ -245,6 +246,35 @@ function Homepage() {
                                 </div>
                                 <span>{projectInformation.description}</span>
                             </div>
+                            {(projectNameFormatted === 'library-of-myralith')
+                                && <>
+                                    <img className='wing left'
+                                        src='/assets/wing.webp'
+                                        alt='wing'/>
+                                    <img className='wing right'
+                                        src='/assets/wing.webp'
+                                        alt='wing'/>
+                                </>}
+                            {(projectNameFormatted === 'cv-builder')
+                                && <div className='clock'>
+                                    <img className='clock-hand minute'
+                                        src='/assets/clock-hand-little.webp'
+                                        alt='clock minute hand'/>
+                                    <img className='clock-hand hour'
+                                        src='/assets/clock-hand-big.webp'
+                                        alt='clock hour hand'/>
+                                </div>}
+                            {(projectNameFormatted === 'moe-memory')
+                                && <>
+                                    <img className='cat-ear left'
+                                        src='/assets/cat-ear.webp'
+                                        alt='left cat ear'/>
+                                    <img className='cat-ear right'
+                                        src='/assets/cat-ear.webp'
+                                        alt='right cat ear'/>
+                                </>}
+                            {(projectNameFormatted === 'shapedepot')
+                                && <MatterScene/>}
                         </div>
                     })}
                 </div>

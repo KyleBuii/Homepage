@@ -133,6 +133,26 @@ a {
     }
 
     &.library-of-myralith {
+        box-shadow:
+            0 0 200px white,
+            0 0 200px #fff696;
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 40px;
+            width: 100%;
+            height: 20px;
+            background-color: #fff696;
+            border: 2px solid #ffea00;
+            border-radius: 30%;
+            box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
+            filter: blur(4px);
+            opacity: 0.8;
+        }
+    }
+
+    &.cv-builder {
         overflow: hidden;
         
         &::after {
@@ -145,7 +165,7 @@ a {
                 linear-gradient(
                     120deg,
                     transparent 0%,
-                    rgba(255, 255, 255, 0.1) 50%,
+                    rgba(255, 255, 255, 0.5) 50%,
                     transparent 100%
                 );
             transform: rotate(25deg);
@@ -163,6 +183,63 @@ a {
     border-radius: 50%;
     transform: scale(0);
     animation: ripple-animation 20s linear;
+}
+
+.wing {
+    position: absolute;
+
+    &.left {
+        right: 90%;
+    }
+
+    &.right {
+        transform: scaleX(-1);
+        right: unset;
+        left: 90%;
+    }
+}
+
+.clock {
+    z-index: -1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    opacity: 0.8;
+}
+
+.clock-hand {
+    position: absolute;
+    height: 50%;
+    transform-origin: 50% 90.5%;
+
+    &.minute {
+        animation: clock-tick 5s linear infinite;
+    }
+
+    &.hour {
+        animation: clock-tick 60s linear infinite;
+    }
+}
+
+.cat-ear {
+    position: absolute;
+    bottom: 72%;
+
+    &.left {
+        right: 78%;
+    }
+
+    &.right {
+        right: unset;
+        left: 78%;
+        transform: scaleX(-1);
+    }
+}
+
+.matter-scene {
+    position: absolute;
+    width: 100%;
+    height: 100%;
 }
 
 .title {
@@ -273,13 +350,15 @@ a {
 }
 
 @keyframes ripple-animation {
-    to {
-        transform: scale(1000);
-        opacity: 0;
-    }
+    to { transform: scale(1000); opacity: 0; }
 }
 
 @keyframes shine {
     0%   { left: -75%; }
     100% { left: 150%; }
+}
+
+@keyframes clock-tick {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
 }
