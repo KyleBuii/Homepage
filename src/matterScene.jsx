@@ -1,7 +1,7 @@
 import Matter, { Events } from 'matter-js';
 import { useEffect, useRef } from 'react';
 
-const strokeStyle = 'black';
+const strokeStyle = '#0061d7';
 const lineWidth = 2;
 const shapeCreators = {
     square: (x, y) =>
@@ -120,6 +120,7 @@ const MatterScene = () => {
         Composite.add(world, cursor);
 
         const mouse = Mouse.create(render.canvas);
+        mouse.element.removeEventListener('wheel', mouse.mousewheel);
 
         Events.on(engine, 'beforeUpdate', () => {
             Matter.Body.setPosition(cursor, {
