@@ -83,7 +83,7 @@ function Homepage() {
             },
             'Library of Myralith': {
                 github: 'https://github.com/KyleBuii/Library-of-Myralith',
-                website: 'https://kylebuii.github.io/Library-of-Myralith/',
+                website: 'https://library-of-myralith.vercel.app/',
                 description: 'Simple library web application concept made with HTML/JS.',
             },
             'CV Builder': {
