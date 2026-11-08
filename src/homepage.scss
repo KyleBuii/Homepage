@@ -138,6 +138,7 @@ a {
             0 0 200px #fff696;
 
         &::after {
+            z-index: 2;
             content: '';
             position: absolute;
             top: 40px;
@@ -329,8 +330,13 @@ a {
     }
 
     &.active {
+        z-index: 1;
         opacity: 1;
     }
+}
+
+.project-buttons {
+    @extend .flex-row;
 }
 
 .contact-me {

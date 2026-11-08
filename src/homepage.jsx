@@ -101,6 +101,11 @@ function Homepage() {
                 website: 'https://shape-depot.vercel.app/',
                 description: 'ShapeDepot is a fun and simple app where you can buy shapes, keep them in your inventory, and freely move them around to play. Explore and experiment with various shapes!',
             },
+            'Decky': {
+                github: 'https://github.com/KyleBuii/Decky',
+                website: 'https://decky-decky.vercel.app/',
+                description: 'Decky is a playing card playground.',
+            },
         });
 
         initParticlesEngine(async (engine) => {
@@ -165,12 +170,16 @@ function Homepage() {
     const handleClickProject = (event) => {
         const elementProject = event.currentTarget;
         const elementProjectInfo = event.currentTarget.firstChild;
+        const elementProjectButtons = elementProjectInfo.querySelector('.project-buttons');
+
         if (elementProject.classList.contains('active')) {
             elementProject.classList.remove('active');
             elementProjectInfo.classList.remove('active');
+            elementProjectButtons.classList.remove('active');
         } else {
             elementProject.classList.add('active');
             elementProjectInfo.classList.add('active');
+            elementProjectButtons.classList.add('active');
         };
     };
 
@@ -235,7 +244,7 @@ function Homepage() {
                             <div className='project-information bubble flex-col'>
                                 <div className='flex-row'>
                                     <span>{project}</span>
-                                    <div className='flex-row'>
+                                    <div className='project-buttons'>
                                         <a href={`${projectInformation.github}`}>
                                             <FaGithub color='white'/>
                                         </a>
